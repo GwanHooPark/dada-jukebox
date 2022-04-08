@@ -3,6 +3,13 @@ interface MusicInfo  {
     artist : string
 }
 
+interface MBCInfo {
+    HomeUrl : string,
+    DailyList : string,
+    ListSelector : string
+}
+
 export {
-    MusicInfo
+    MusicInfo,
+    MBCInfo
 }
