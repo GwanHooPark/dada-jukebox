@@ -1,12 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { MusicInfo } from '@/interface/interfaces';
 import axios from 'axios';
 import cheerio, { load } from 'cheerio';
 type CheerioRoot = ReturnType<typeof load>;
-type MusicInfo = {
-    title : string,
-    artist : string
-}
 
 export enum MBC {
     homeUrl = 'https://miniweb.imbc.com',
@@ -19,15 +15,6 @@ export class JukeboxService {
 
     private readonly logger = new Logger(JukeboxService.name);
 
-    //@Cron('10 10 13 * * *', { name: 'get Music' })
-    @Cron('10 * * * * *', { name: 'get Music' })
-    musicListSchedule(): void {
-        this.logger.log('get music....');
-        this.getMusicData().then(result => {
-            console.log(result);
-        });
-    }
-
     async getMusicData(): Promise<Array<MusicInfo>> {        
         const todayUrl:string = await this.getUrl();
         const html:any = await this.getHtml(`${MBC.homeUrl}${todayUrl}`);
@@ -35,7 +22,8 @@ export class JukeboxService {
         const list:any = $(MBC.listSelector);
         
         let musicInfos:Array<MusicInfo> = [];
-        list.each((idx, el) => {
+        list.each((idx:number, el:any) => {
+            if(idx === 0) return true;
             musicInfos.push({
                 title : $(el).find('p.title').text(),
                 artist : $(el).find('p.singer').text()

@@ -5,5 +5,6 @@ import { JukeboxService } from './jukebox.service';
   imports: [],
   controllers: [],
   providers: [JukeboxService],
+  exports: [JukeboxService]
 })
 export class JukeboxModule { }
