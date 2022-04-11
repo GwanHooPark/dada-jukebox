@@ -21,7 +21,7 @@ export class BroadcastService {
                         `${index+1}. ${item.title} - ${item.artist}`
                 )
                 .join("\r\n");
-
+        this.logger.log(`${token} -- ${chatId}`);
         this.logger.log(`send message[${musicList}]`);
         const bot = new TelegramBot(token, {polling: false});
         
