@@ -18,7 +18,7 @@ export class BatchService {
     broadCastMorningJung(): void {
         this.logger.log('broadCastMorningJung schedule....');
         this.jukeboxService.getMBCData(MorningJung).then(result => {            
-            this.broadcastService.telegramSendMessage(result);
+            this.broadcastService.telegramSendMessage(result,'first');
         });
     }
 
@@ -26,7 +26,7 @@ export class BatchService {
     broadCastBaeCam(): void {
         this.logger.log('broadCastBaeCam schedule....');
         this.jukeboxService.getMBCData(BaeCam).then(result => {            
-            this.broadcastService.telegramSendMessage(result);
+            this.broadcastService.telegramSendMessage(result,'last');
         });
     }
     

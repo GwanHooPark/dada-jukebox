@@ -9,11 +9,11 @@ import * as Joi from 'joi';
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env.dev',
-      ignoreEnvFile: process.env.NODE_ENV === 'dev', // prod일때는 heroku에 따로 설정
+      ignoreEnvFile: process.env.NODE_ENV !== 'dev', // prod일때는 heroku에 따로 설정
       validationSchema: Joi.object({
         TELEGRAM_BOT_TOKEN: Joi.string(),
-        TELEGRAM_CHAT_ID: Joi.string().default('@dadajuke'),
-        TELEGRAM_BROADCAST: Joi.boolean().default(false)
+        TELEGRAM_CHAT_ID: Joi.string(),
+        TELEGRAM_BROADCAST: Joi.boolean()
       }),
     }),
     BatchModule],
