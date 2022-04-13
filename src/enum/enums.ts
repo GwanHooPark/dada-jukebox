@@ -10,7 +10,14 @@ enum BaeCam {
     ListSelector = 'table.list-type tbody tr'
 }
 
+enum Movie {
+    HomeUrl = 'https://miniweb.imbc.com',
+    DailyList = 'https://miniweb.imbc.com/Music?page=1&progCode=FM4U000001296',
+    ListSelector = 'table.list-type tbody tr'
+}
+
 export {
     MorningJung,
-    BaeCam
+    BaeCam,
+    Movie
 }

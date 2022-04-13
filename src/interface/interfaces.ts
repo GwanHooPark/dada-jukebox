@@ -1,4 +1,5 @@
 interface MusicInfo  {
+    movieTitle? : string,
     title : string,
     artist : string
 }
