@@ -13,8 +13,8 @@ export class BatchService {
         private readonly broadcastService: BroadcastService
         ) {}
 
-    //@Cron('10 10 13 * * *', { name: 'get Music' })
-    @Cron('10 10 12 * * *', { name: 'get MorningJung' })
+    //@Cron('10 10 12 * * *', { name: 'get MorningJung' })
+    @Cron('10 * * * * *', { name: 'get MorningJung' })
     broadCastMorningJung(): void {
         this.logger.log('broadCastMorningJung schedule....');
         this.jukeboxService.getMBCData(MorningJung).then(result => {            
