@@ -25,7 +25,7 @@ export class BatchService {
     //@Cron('15 * * * * *', { name: 'get BaeCam' })
     @Cron('15 10 12 * * *', { name: 'get BaeCam' })
     broadCastBaeCam(): void {
-        this.logger.log('broadCastBaeCam schedule....');
+        this.logger.log('broadCastBaeCam schedule.....');
         this.jukeboxService.getMBCData(BaeCam).then(result => {            
             this.broadcastService.telegramSendMessage(result,'배철수의 음악캠프');
         });
