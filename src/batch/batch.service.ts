@@ -13,8 +13,8 @@ export class BatchService {
         private readonly broadcastService: BroadcastService
         ) {}
 
-    //@Cron('10 * * * * *', { name: 'get MorningJung' })
-    @Cron('10 10 12 * * *', { name: 'get MorningJung' })
+    @Cron('10 * * * * *', { name: 'get MorningJung' })
+    //@Cron('10 10 12 * * *', { name: 'get MorningJung' })
     broadCastMorningJung(): void {
         this.logger.log('broadCastMorningJung schedule....');
         this.jukeboxService.getMBCData(MorningJung).then(result => {            
@@ -22,8 +22,8 @@ export class BatchService {
         });
     }
     
-    //@Cron('15 * * * * *', { name: 'get BaeCam' })
-    @Cron('15 10 12 * * *', { name: 'get BaeCam' })
+    @Cron('15 * * * * *', { name: 'get BaeCam' })
+    //@Cron('15 10 12 * * *', { name: 'get BaeCam' })
     broadCastBaeCam(): void {
         this.logger.log('broadCastBaeCam schedule.....');
         this.jukeboxService.getMBCData(BaeCam).then(result => {            
@@ -31,8 +31,8 @@ export class BatchService {
         });
     }
     
-    //@Cron('20 * * * * *', { name: 'get Movie' })
-    @Cron('20 10 12 * * *', { name: 'get Movie' })
+    @Cron('20 * * * * *', { name: 'get Movie' })
+    //@Cron('20 10 12 * * *', { name: 'get Movie' })
     broadCastMovie(): void {
         this.logger.log('broadCastMovie schedule....');
         this.jukeboxService.getMBCMovieData(Movie).then(result => {            
