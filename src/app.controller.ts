@@ -1,18 +1,36 @@
-import { Controller, Get, Render, Logger } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Render, Logger, Param } from '@nestjs/common';
+import { JukeboxService } from './jukebox/jukebox.service';
 
 @Controller()
 export class AppController {
 
   private readonly logger = new Logger(AppController.name);
 
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly jukeboxService: JukeboxService
+    ) {}
 
   @Get()
   @Render('index')
-  root() {
-    console.log('index page!!!');
-    this.logger.log("testing page");
-    return {message : `hello dada jukebox ${new Date()}`};
+  root() {   
+    return {message : `hello dada jukebox`};
+  }
+
+  @Get('/api/broadcast/:type')
+  broadcast(@Param('type') type: string): void {
+    this.logger.log(`braoadcast excute [${type}]`);
+    switch (type) {
+      case 'jung':
+        this.jukeboxService.broadCastMorningJung();
+        break;
+      case 'bae':
+        this.jukeboxService.broadCastBaeCam();
+        break;
+      case 'movie':
+        this.jukeboxService.broadCastMovie();
+        break;
+      default:
+        console.log('none');
+    }
   }
 }

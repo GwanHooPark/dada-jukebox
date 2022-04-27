@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { JukeboxService } from './jukebox.service';
+import { JukeboxService } from '@/jukebox/jukebox.service';
+import { BroadcastModule } from '@/broadcast/broadcast.module';
 
 @Module({
-  imports: [],
+  imports: [BroadcastModule],
   controllers: [],
   providers: [JukeboxService],
   exports: [JukeboxService]

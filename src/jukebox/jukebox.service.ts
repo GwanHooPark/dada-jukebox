@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { MusicInfo, MBCInfo } from '@/interface/interfaces';
+import { MorningJung, BaeCam, Movie } from '@/enum/enums';
+import { BroadcastService } from '@/broadcast/broadcast.service';
 import axios from 'axios';
 import cheerio, { load } from 'cheerio';
 type CheerioRoot = ReturnType<typeof load>;
@@ -8,6 +10,10 @@ type CheerioRoot = ReturnType<typeof load>;
 export class JukeboxService {
 
     private readonly logger = new Logger(JukeboxService.name);
+
+    constructor(
+        private readonly broadcastService: BroadcastService
+        ) {}
 
     initMusicInfo(options?: Partial<MusicInfo>):MusicInfo {
         const defaults = {
@@ -96,5 +102,26 @@ export class JukeboxService {
         }catch(err) {
             this.logger.log(err);
         }
+    }
+
+    broadCastMorningJung(): void {
+        this.logger.log('broadCast MorningJung....');
+        this.getMBCData(MorningJung).then(result => {            
+            this.broadcastService.telegramSendMessage(result,'오늘 아침 정지영입니다');
+        });
+    }
+
+    broadCastBaeCam(): void {
+        this.logger.log('broadCast BaeCam.....');
+        this.getMBCData(BaeCam).then(result => {            
+            this.broadcastService.telegramSendMessage(result,'배철수의 음악캠프');
+        });
+    }
+
+    broadCastMovie(): void {
+        this.logger.log('broadCast Movie....');
+        this.getMBCMovieData(Movie).then(result => {            
+            this.broadcastService.telegramSendMessage(result,'FM영화음악 김세윤입니다');
+        });
     }
 }

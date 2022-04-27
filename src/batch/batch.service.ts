@@ -1,43 +1,34 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { JukeboxService } from '@/jukebox/jukebox.service';
-import { BroadcastService } from '@/broadcast/broadcast.service';
-import { MorningJung, BaeCam, Movie } from '@/enum/enums';
 
 @Injectable()
 export class BatchService {
 
     private readonly logger = new Logger(JukeboxService.name);
     constructor(
-        private readonly jukeboxService: JukeboxService,
-        private readonly broadcastService: BroadcastService
+        private readonly jukeboxService: JukeboxService
         ) {}
 
-    @Cron('10 * * * * *', { name: 'get MorningJung' })
-    //@Cron('10 10 12 * * *', { name: 'get MorningJung' })
-    broadCastMorningJung(): void {
+    //@Cron('10 * * * * *', { name: 'get MorningJung' })
+    @Cron('10 10 12 * * *', { name: 'get MorningJung' })
+    batchMorningJung(): void {
         this.logger.log('broadCastMorningJung schedule....');
-        this.jukeboxService.getMBCData(MorningJung).then(result => {            
-            this.broadcastService.telegramSendMessage(result,'오늘 아침 정지영입니다');
-        });
+        this.jukeboxService.broadCastMorningJung();
     }
     
-    @Cron('15 * * * * *', { name: 'get BaeCam' })
-    //@Cron('15 10 12 * * *', { name: 'get BaeCam' })
-    broadCastBaeCam(): void {
+    //@Cron('15 * * * * *', { name: 'get BaeCam' })
+    @Cron('15 10 12 * * *', { name: 'get BaeCam' })
+    batchBaeCam(): void {
         this.logger.log('broadCastBaeCam schedule.....');
-        this.jukeboxService.getMBCData(BaeCam).then(result => {            
-            this.broadcastService.telegramSendMessage(result,'배철수의 음악캠프');
-        });
+        this.jukeboxService.broadCastBaeCam();
     }
     
-    @Cron('20 * * * * *', { name: 'get Movie' })
-    //@Cron('20 10 12 * * *', { name: 'get Movie' })
+    //@Cron('20 * * * * *', { name: 'get Movie' })
+    @Cron('20 10 12 * * *', { name: 'get Movie' })
     broadCastMovie(): void {
         this.logger.log('broadCastMovie schedule....');
-        this.jukeboxService.getMBCMovieData(Movie).then(result => {            
-            this.broadcastService.telegramSendMessage(result,'FM영화음악 김세윤입니다');
-        });
+        this.jukeboxService.broadCastMovie();
     }
     
 }

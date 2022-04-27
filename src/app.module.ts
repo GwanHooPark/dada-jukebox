@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {BatchModule} from '@/batch/batch.module';
+import { JukeboxModule } from './jukebox/jukebox.module';
+
 import * as Joi from 'joi';
 
 @Module({
@@ -16,7 +18,8 @@ import * as Joi from 'joi';
         TELEGRAM_BROADCAST: Joi.boolean()
       }),
     }),
-    BatchModule],
+    BatchModule,
+    JukeboxModule],
   controllers: [AppController],
   providers: [AppService],
 })
