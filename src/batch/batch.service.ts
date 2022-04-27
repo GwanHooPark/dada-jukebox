@@ -30,5 +30,11 @@ export class BatchService {
         this.logger.log('broadCastMovie schedule....');
         this.jukeboxService.broadCastMovie();
     }
+
+    @Cron('25 10 12 * * *', { name: 'get Sticker' })
+    broadCastSticker(): void {
+        this.logger.log('broadCastSticker schedule....');
+        this.jukeboxService.broadCastSticker();
+    }
     
 }

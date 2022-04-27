@@ -26,13 +26,24 @@ export class BroadcastService {
                                 .map(this.makeTelegramMessage)
                                 .join("\r\n");        
         const messageTitle:string = `==== ${today} ${title} ====\r\n`;
-        
         this.logger.log(`send message[${musicList}]`);
 
         const bot = new TelegramBot(token, {polling: false});
         if(isBroadCast){
             this.logger.log('send telegram channel message');
             bot.sendMessage(chatId, messageTitle + musicList);
+        }
+    }
+
+    telegramSendSticker(stickerId:string):void {
+
+        const token:string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
+        const chatId:string = this.configService.get<string>('TELEGRAM_CHAT_ID');
+        const isBroadCast:boolean = this.configService.get('TELEGRAM_BROADCAST');
+        const bot = new TelegramBot(token, {polling: false});
+        if(isBroadCast){
+            this.logger.log('send telegram channel sticker');
+            bot.sendSticker(chatId,stickerId);
         }
     }
 }

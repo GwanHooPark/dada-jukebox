@@ -124,4 +124,26 @@ export class JukeboxService {
             this.broadcastService.telegramSendMessage(result,'FM영화음악 김세윤입니다');
         });
     }
+
+    broadCastSticker(): void {
+        this.logger.log('broadCast Sticker....');
+
+        const stickerArray: Array<string> = [
+            'CAACAgIAAxkBAAETa0xiaPlCDvoQnW7_CqTT8wLISiBFGwACvRYAAjAMGUlko0VdYj3dvCQE',
+            'CAACAgIAAxkBAAETa1BiaPlP6DjUiUiZhVxXOAgSDmqPyQACDBUAArWWwEkbvTw_gXdZNCQE',
+            'CAACAgIAAxkBAAETa1JiaPlfmPRnajXieTFWNvY9EEvv2AACXxAAArzjcEqZGcffSNgbqyQE',
+            'CAACAgIAAxkBAAETa1RiaPlzhCan5sp1giV7jIxw09p05gACGxoAAlmacEpfd39IdgQAATMkBA',
+            'CAACAgIAAxkBAAETa1ZiaPl6m_GUttOpTDDg2gP96_3HlQACXxMAAnRAyEngtYG71Vj44SQE',
+            'CAACAgIAAxkBAAETa1hiaPl9i1ABy2G-UxWCVvHBrJ21xgACERcAAibbGEltzfGE5-uWTSQE',
+            'CAACAgIAAxkBAAETa1piaPmD1N7FqbYKeLkaVEOiH2WOowAC_RIAAi0PwEqm7dD72wHRCyQE',
+            'CAACAgIAAxkBAAETa1xiaPmHHcRqE-iVR9jaHHXjrQG_HgACrxIAAvBlyUmhaw1_yW2QySQE',
+            'CAACAgIAAxkBAAETa15iaPmMAAGUiysZtJhrAlef1PL2PPkAAkUVAAJuzcBKpd2uppSx2egkBA',
+            'CAACAgIAAxkBAAETa2BiaPmP7yiRacp2QSxUNZfMa3rblwACOBgAArryGUmbrkkDX0225yQE',
+            'CAACAgIAAxkBAAETa2JiaPmRf4fL9fJIA3A-FF1B6oIHkgAC2BcAAlMgcUqaxWeEUY2fkyQE',
+            'CAACAgIAAxkBAAETa2RiaPmZtPrRkLYgevNDT4NhCRa45QACkxUAAha3eErV5NpvJN9I8CQE',
+            'CAACAgIAAxkBAAETa2ZiaPmdHeX6061qa9qLfEDDDv0s0gACERcAAibbGEltzfGE5-uWTSQE'
+        ];
+        const randomNum: number = Math.floor(Math.random() * stickerArray.length);
+        this.broadcastService.telegramSendSticker(stickerArray[randomNum]);
+    }
 }

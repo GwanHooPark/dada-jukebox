@@ -29,8 +29,11 @@ export class AppController {
       case 'movie':
         this.jukeboxService.broadCastMovie();
         break;
+      case 'sticker':
+        this.jukeboxService.broadCastSticker();
+        break;
       default:
         console.log('none');
     }
-  }
+  }  
 }

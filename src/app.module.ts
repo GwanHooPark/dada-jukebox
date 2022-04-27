@@ -10,6 +10,7 @@ import * as Joi from 'joi';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: '.env.dev',
       ignoreEnvFile: process.env.NODE_ENV !== 'dev', // prod일때는 heroku에 따로 설정
       validationSchema: Joi.object({
