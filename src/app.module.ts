@@ -22,8 +22,8 @@ import * as Joi from 'joi';
     }),
     BatchModule,
     JukeboxModule,
-  SpotifyModule],
+    SpotifyModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

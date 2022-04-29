@@ -8,42 +8,42 @@ export class BroadcastService {
 
     private readonly logger = new Logger(BroadcastService.name);
 
-    constructor(private configService: ConfigService) {}
+    constructor(private configService: ConfigService) { }
 
-    makeTelegramMessage(item:MusicInfo,index:number) : string {
+    makeTelegramMessage(item: MusicInfo, index: number): string {
         const musicTitle = item.movieTitle ? `[${item.movieTitle}]` : '';
-        return  `${index+1}. ${musicTitle} ${item.title} - ${item.artist}`;
+        return `${index + 1}. ${musicTitle} ${item.title} - ${item.artist}`;
 
     }
-    
-    telegramSendMessage(message:any,title:string): void {
-        
-        const token:string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
-        const chatId:string = this.configService.get<string>('TELEGRAM_CHAT_ID');
-        const isBroadCast:boolean = this.configService.get('TELEGRAM_BROADCAST');
+
+    telegramSendMessage(message: any, title: string): void {
+
+        const token: string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
+        const chatId: string = this.configService.get<string>('TELEGRAM_CHAT_ID');
+        const isBroadCast: boolean = this.configService.get('TELEGRAM_BROADCAST');
         const today = new Date().toLocaleDateString();
-        const musicList:string = message
-                                .map(this.makeTelegramMessage)
-                                .join("\r\n");        
-        const messageTitle:string = `==== ${today} ${title} ====\r\n`;
+        const musicList: string = message
+            .map(this.makeTelegramMessage)
+            .join("\r\n");
+        const messageTitle: string = `==== ${today} ${title} ====\r\n`;
         this.logger.log(`send message[${musicList}]`);
 
-        const bot = new TelegramBot(token, {polling: false});
-        if(isBroadCast){
+        const bot = new TelegramBot(token, { polling: false });
+        if (isBroadCast) {
             this.logger.log('send telegram channel message');
             bot.sendMessage(chatId, messageTitle + musicList);
         }
     }
 
-    telegramSendSticker(stickerId:string):void {
+    telegramSendSticker(stickerId: string): void {
 
-        const token:string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
-        const chatId:string = this.configService.get<string>('TELEGRAM_CHAT_ID');
-        const isBroadCast:boolean = this.configService.get('TELEGRAM_BROADCAST');
-        const bot = new TelegramBot(token, {polling: false});
-        if(isBroadCast){
+        const token: string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
+        const chatId: string = this.configService.get<string>('TELEGRAM_CHAT_ID');
+        const isBroadCast: boolean = this.configService.get('TELEGRAM_BROADCAST');
+        const bot = new TelegramBot(token, { polling: false });
+        if (isBroadCast) {
             this.logger.log('send telegram channel sticker');
-            bot.sendSticker(chatId,stickerId);
+            bot.sendSticker(chatId, stickerId);
         }
     }
 }

@@ -11,14 +11,14 @@ export class AppController {
   constructor(
     private readonly jukeboxService: JukeboxService,
     private readonly spotifyService: SpotifyService
-    ) {}
+  ) { }
 
   @Get()
   @Render('index')
-  async root() {   
-    const list:Array<MusicList> = await this.spotifyService.getMusicList();
+  async root() {
+    const list: Array<MusicList> = await this.spotifyService.getMusicList();
     console.log(list)
-    return { message: '123 ', musicList : list}
+    return { message: '123 ', musicList: list }
   }
 
   @Get('/api/broadcast/:type')
@@ -41,9 +41,10 @@ export class AppController {
         console.log('none');
     }
   }
-  
+
   @Get('/api/search')
-  search(@Query('keyword') keyword: string): void {
-    this.logger.log(`search keyword ${keyword}`);    
+  search(@Query('keyword') keyword: string, @Query('artist') artist: string): void {
+    this.spotifyService.search(keyword, artist);
+    this.logger.log(`search keyword ${keyword}`);
   }
 }

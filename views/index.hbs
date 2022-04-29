@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>DaDa JukeBox</title>
     <script>
         function broadCast(type) {
             fetch(`/api/broadcast/${type}`)
-            .then(res => {
-                console.log('Fetch Success');
-            })
-            .catch(err => {
-                // error 처리
-                console.log('Fetch Error', err);
-            });
+                .then(res => {
+                    console.log('Fetch Success');
+                })
+                .catch(err => {
+                    // error 처리
+                    console.log('Fetch Error', err);
+                });
         }
         function search() {
-          const keyword = document.getElementById('artist').value;
-          console.log(keyword);
-          fetch(`/api/search?keyword=${keyword}`)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                // error 처리
-                console.log('Fetch Error', err);
-            });
+            const keyword = document.getElementById('keyword').value;
+            const artist = document.getElementById('artist').value;
+            console.log(`${keyword} ${artist}`);
+            fetch(`/api/search?keyword=${keyword}&artist=${artist}`)
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    // error 처리
+                    console.log('Fetch Error', err);
+                });
         }
     </script>
-  </head>
-  <body>
-        {{ message }}<br/><br/>
-        <button type="button" onclick="broadCast('jung')">오늘아침 정지영입니다.</button><br/>
-        <button type="button" onclick="broadCast('bae')">배철수의 음악캠프</button><br/>
-        <button type="button" onclick="broadCast('movie')">FM영화음악 김세윤입니다</button><br/>
-        <button type="button" onclick="broadCast('sticker')">random sticker</button><br/>
-        <input type="text" name="artist" id="artist"/> <input type="button" onclick="search()" value="검색" />
+</head>
 
-        <ul>
-            {{#each musicList}}
-            <li>
-                <img src="{{albumThumbnailUrl}}"/>
-                <span class="title">{{title}}</span> - 
-                <span class="title">{{artist}}</span> - 
-                <a href="{{previewUrl}}">preview</a> 
-            </li>
-            {{/each}}
-        </ul>
-  </body>
+<body>
+    {{ message }}<br /><br />
+    <button type="button" onclick="broadCast('jung')">오늘아침 정지영입니다.</button><br />
+    <button type="button" onclick="broadCast('bae')">배철수의 음악캠프</button><br />
+    <button type="button" onclick="broadCast('movie')">FM영화음악 김세윤입니다</button><br />
+    <button type="button" onclick="broadCast('sticker')">random sticker</button><br />
+    keyword : <input type="text" name="keyword" id="keyword" /><br />
+    artist : <input type="text" name="artist" id="artist" /><br />
+    <input type="button" onclick="search()" value="검색" />
+
+    <ul>
+        {{#each musicList}}
+        <li>
+            <img src="{{albumThumbnailUrl}}" />
+            <span class="title">{{title}}</span> -
+            <span class="title">{{artist}}</span> -
+            <a href="{{previewUrl}}">preview</a>
+        </li>
+        {{/each}}
+    </ul>
+</body>
+
 </html>

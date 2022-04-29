@@ -5,9 +5,9 @@ import { SpotifyAuth } from './spotify.auth';
 import { HttpModule } from '@nestjs/axios'
 
 @Module({
-  imports: [HttpModule,JukeboxModule],
+  imports: [HttpModule, JukeboxModule],
   controllers: [],
-  providers: [SpotifyService,SpotifyAuth],
+  providers: [SpotifyService, SpotifyAuth],
   exports: [SpotifyService]
 })
 export class SpotifyModule { }

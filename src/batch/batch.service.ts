@@ -8,7 +8,7 @@ export class BatchService {
     private readonly logger = new Logger(JukeboxService.name);
     constructor(
         private readonly jukeboxService: JukeboxService
-        ) {}
+    ) { }
 
     //@Cron('10 * * * * *', { name: 'get MorningJung' })
     @Cron('10 10 12 * * *', { name: 'get MorningJung' })
@@ -16,14 +16,14 @@ export class BatchService {
         this.logger.log('broadCastMorningJung schedule....');
         this.jukeboxService.broadCastMorningJung();
     }
-    
+
     //@Cron('15 * * * * *', { name: 'get BaeCam' })
     @Cron('15 10 12 * * *', { name: 'get BaeCam' })
     batchBaeCam(): void {
         this.logger.log('broadCastBaeCam schedule.....');
         this.jukeboxService.broadCastBaeCam();
     }
-    
+
     //@Cron('20 * * * * *', { name: 'get Movie' })
     @Cron('20 10 12 * * *', { name: 'get Movie' })
     broadCastMovie(): void {
@@ -36,5 +36,5 @@ export class BatchService {
         this.logger.log('broadCastSticker schedule....');
         this.jukeboxService.broadCastSticker();
     }
-    
+
 }
