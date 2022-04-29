@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {BatchModule} from '@/batch/batch.module';
+import { BatchModule } from '@/batch/batch.module';
 import { JukeboxModule } from './jukebox/jukebox.module';
+import { SpotifyModule } from './spotify/spotify.module';
 
 import * as Joi from 'joi';
 
@@ -20,7 +21,8 @@ import * as Joi from 'joi';
       }),
     }),
     BatchModule,
-    JukeboxModule],
+    JukeboxModule,
+  SpotifyModule],
   controllers: [AppController],
   providers: [AppService],
 })

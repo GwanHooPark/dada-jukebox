@@ -1,5 +1,7 @@
-import { Controller, Get, Render, Logger, Param } from '@nestjs/common';
+import { Controller, Get, Render, Logger, Param, Query } from '@nestjs/common';
+import { MusicList } from './interface/interfaces';
 import { JukeboxService } from './jukebox/jukebox.service';
+import { SpotifyService } from './spotify/spotify.service';
 
 @Controller()
 export class AppController {
@@ -7,13 +9,16 @@ export class AppController {
   private readonly logger = new Logger(AppController.name);
 
   constructor(
-    private readonly jukeboxService: JukeboxService
+    private readonly jukeboxService: JukeboxService,
+    private readonly spotifyService: SpotifyService
     ) {}
 
   @Get()
   @Render('index')
-  root() {   
-    return {message : `hello dada jukebox`};
+  async root() {   
+    const list:Array<MusicList> = await this.spotifyService.getMusicList();
+    console.log(list)
+    return { message: '123 ', musicList : list}
   }
 
   @Get('/api/broadcast/:type')
@@ -35,5 +40,10 @@ export class AppController {
       default:
         console.log('none');
     }
-  }  
+  }
+  
+  @Get('/api/search')
+  search(@Query('keyword') keyword: string): void {
+    this.logger.log(`search keyword ${keyword}`);    
+  }
 }

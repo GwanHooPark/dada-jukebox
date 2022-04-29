@@ -14,6 +14,18 @@
                 console.log('Fetch Error', err);
             });
         }
+        function search() {
+          const keyword = document.getElementById('artist').value;
+          console.log(keyword);
+          fetch(`/api/search?keyword=${keyword}`)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                // error 처리
+                console.log('Fetch Error', err);
+            });
+        }
     </script>
   </head>
   <body>
@@ -22,5 +34,17 @@
         <button type="button" onclick="broadCast('bae')">배철수의 음악캠프</button><br/>
         <button type="button" onclick="broadCast('movie')">FM영화음악 김세윤입니다</button><br/>
         <button type="button" onclick="broadCast('sticker')">random sticker</button><br/>
+        <input type="text" name="artist" id="artist"/> <input type="button" onclick="search()" value="검색" />
+
+        <ul>
+            {{#each musicList}}
+            <li>
+                <img src="{{albumThumbnailUrl}}"/>
+                <span class="title">{{title}}</span> - 
+                <span class="title">{{artist}}</span> - 
+                <a href="{{previewUrl}}">preview</a> 
+            </li>
+            {{/each}}
+        </ul>
   </body>
 </html>

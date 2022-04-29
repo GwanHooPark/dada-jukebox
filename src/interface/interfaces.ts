@@ -10,7 +10,15 @@ interface MBCInfo {
     ListSelector : string
 }
 
+interface MusicList {
+    albumThumbnailUrl? : string,
+    title? : string,
+    artist? : string,
+    previewUrl? : string
+}
+
 export {
     MusicInfo,
-    MBCInfo
+    MBCInfo,
+    MusicList
 }
