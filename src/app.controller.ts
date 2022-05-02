@@ -21,6 +21,14 @@ export class AppController {
     return { message: '123 ', musicList: list }
   }
 
+   @Get('/musiclist')
+  @Render('musicList')
+  async musicList() {
+    const list: Array<MusicList> = await this.spotifyService.getMusicList();
+    console.log(list)
+    return { message: '123 ', musicList: list }
+  }
+
   @Get('/api/broadcast/:type')
   broadcast(@Param('type') type: string): void {
     this.logger.log(`braoadcast excute [${type}]`);

@@ -1,0 +1,144 @@
+<html>
+<head>
+   <link rel="stylesheet" sype="text/css" href = "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.4.4/dist/flowbite.js"></script>
+    <style>
+        video::-webkit-media-controls-timeline {
+            display: none;
+        }
+        video::-webkit-media-controls-volume-slider {
+            display: none;
+        }
+        video::-webkit-media-controls-mute-button {
+            display: none;
+        }       
+
+     
+
+    </style>
+    <script>
+        
+        $(document).ready(function(){
+            console.log("Read");
+            // create an array of objects with the id, trigger element (eg. button), and the content element
+            const tabElements = [
+                {
+                    id: 'morning',
+                    triggerEl: document.querySelector('#morningJungTab'),
+                    targetEl: document.querySelector('#morningJung')
+                },
+                {
+                    id: 'baecam',
+                    triggerEl: document.querySelector('#baeCamTab'),
+                    targetEl: document.querySelector('#baecam')
+                },
+                {
+                    id: 'movie',
+                    triggerEl: document.querySelector('#movieTab'),
+                    targetEl: document.querySelector('#movie')
+                }                
+            ];
+
+            // options with default values
+            const options = {
+                defaultTabId: 'morning',
+                activeClasses: 'text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-400 border-blue-600 dark:border-blue-500',
+                inactiveClasses: 'text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300',
+                onShow: () => {
+                    console.log('tab is shown');
+                }
+            };
+            const tabs = new Tabs(tabElements, options);
+            audioSetting();
+        });
+    </script>
+</head>
+<body>
+    <div class="container mx-auto px-4">
+        <div class="mb-4 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2" id="morningJungTab" data-tabs-target="#morningJung" type="button" role="tab" aria-controls="morningJung" aria-selected="false">정지영입니다.</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="baeCamTab" data-tabs-target="#baeCam" type="button" role="tab" aria-controls="baeCam" aria-selected="false">배철수음악캠프</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="movieTab" data-tabs-target="#movie" type="button" role="tab" aria-controls="movie" aria-selected="false">Settings</button>
+                </li>        
+            </ul>
+        </div>
+        <div id="myTabContent">
+            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="morningJung" role="tabpanel">
+                <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
+                    <tbody class="divide-y divide-gray-200">
+                        {{#each musicList}}
+                        <tr>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="inline-flex w-10 h-10"> 
+                                        <img class='w-10 h-10 object-cover rounded-md' alt='User avatar' src='{{albumThumbnailUrl}}' /> 
+                                    </div>
+                                    <div>
+                                        <p> {{title}} </p>
+                                        <p class="text-gray-500 text-sm font-semibold tracking-wide"> {{artist}} </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <video name="media" controls="false" controlslist="nofullscreen nodownload noplaybackrate">
+                                    <source src="https://p.scdn.co/mp3-preview/343686ba3b5bf317a988d4a233f5fcbede3af053?cid=d5108a9acb0d4f0bbc23567fd0631e2c" type="audio/mpeg">
+                                </video>                                
+                            </td>
+                        </tr>   
+                        {{/each}}                
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="baeCam" role="tabpanel" >
+                <p class="text-sm text-gray-500 dark:text-gray-400">배철수의 음악캠프</p>
+            </div>
+            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="movie" role="tabpanel">
+                <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="inline-flex w-10 h-10"> <img class='w-10 h-10 object-cover rounded-md' alt='User avatar' src='https://i.imgur.com/siKnZP2.jpg' /> </div>
+                                    <div>
+                                        <p> Mira Rodeo </p>
+                                        <p class="text-gray-500 text-sm font-semibold tracking-wide"> mirarodeo23@mail.com </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center"> <span class="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full"> Active </span> </td>
+                        </tr>                   
+                    </tbody>
+                </table>
+            </div>
+            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel">
+                <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="inline-flex w-10 h-10"> <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://i.imgur.com/siKnZP2.jpg' /> </div>
+                                    <div>
+                                        <p> Mira Rodeo </p>
+                                        <p class="text-gray-500 text-sm font-semibold tracking-wide"> mirarodeo23@mail.com </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center"> <span class="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full"> Active </span> </td>
+                        </tr>                   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
