@@ -23,10 +23,10 @@ export class AppController {
     return { jungList: jungList, baeList: baeList, movieList: movieList };
   }
 
-   @Get('/admin7979')
+  @Get('/admin7979')
   @Render('index')
   async musicList() {
-   
+
     return { message: '123' };
   }
 
@@ -46,6 +46,8 @@ export class AppController {
       case 'sticker':
         this.jukeboxService.broadCastSticker();
         break;
+      case 'web':
+        this.jukeboxService.broadCastWebUrl();
       default:
         console.log('none');
     }

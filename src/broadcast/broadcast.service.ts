@@ -16,7 +16,7 @@ export class BroadcastService {
 
     }
 
-    telegramSendMessage(message: any, title: string): void {
+    telegramSendMusicMessage(message: any, title: string): void {
 
         const token: string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
         const chatId: string = this.configService.get<string>('TELEGRAM_CHAT_ID');
@@ -32,6 +32,18 @@ export class BroadcastService {
         if (isBroadCast) {
             this.logger.log('send telegram channel message');
             bot.sendMessage(chatId, messageTitle + musicList);
+        }
+    }
+
+    telegramSendMessage(message: any, title: string): void {
+        const token: string = this.configService.get<string>('TELEGRAM_BOT_TOKEN');
+        const chatId: string = this.configService.get<string>('TELEGRAM_CHAT_ID');
+        const isBroadCast: boolean = this.configService.get('TELEGRAM_BROADCAST');
+        const messageTitle: string = `==== ${title} ====\r\n`;
+        const bot = new TelegramBot(token, { polling: false });
+        if (isBroadCast) {
+            this.logger.log('send telegram channel message');
+            bot.sendMessage(chatId, messageTitle + message);
         }
     }
 

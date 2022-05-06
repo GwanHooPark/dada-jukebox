@@ -1,8 +1,12 @@
 <tr>
     <td class="px-6 py-4">
         <div class="flex items-center space-x-3">
-            <div class="inline-flex w-10 h-10"> 
-                <img class='w-10 h-10 object-cover rounded-md' alt='User avatar' src='{{albumThumbnailUrl}}' /> 
+            <div class="inline-flex w-10 h-10">
+                {{#if albumThumbnailUrl}}
+                <img class='w-10 h-10 object-cover rounded-md' alt='album image' src='{{albumThumbnailUrl}}' />
+                {{else}}
+                <img class='w-10 h-10 object-cover rounded-md' alt='album image' src='/assets/image/record.png' />
+                {{/if}}
             </div>
             <div class="">
                 <p class=""> {{#if movieTitle}}[{{movieTitle}}]{{/if}} {{title}} </p>
@@ -10,16 +14,16 @@
             </div>
         </div>
         {{#if previewUrl}}
-            <div class="dada-audio">
-                <img class="spotify-logo w-9" src='/assets/image/Spotify_Icon_RGB_Green.png' /> 
-                <audio src="{{previewUrl}}" preload="metadata" loop></audio>	  
-                <button class="play-icon"></button>
-                <span class="time current-time">0:00</span>
-                <input type="range" class="seek-slider" max="100" value="0">
-                <span class="time duration">0:00</span>
-                <button class="mute-icon"></button>
-            </div>       
+        <div class="dada-audio">
+            <img class="spotify-logo w-9" src='/assets/image/Spotify_Icon_RGB_Green.png' />
+            <audio src="{{previewUrl}}" preload="metadata" loop></audio>
+            <button class="play-icon"></button>
+            <span class="time current-time">0:00</span>
+            <input type="range" class="seek-slider" max="100" value="0">
+            <span class="time duration">0:00</span>
+            <button class="mute-icon"></button>
+        </div>
         {{/if}}
     </td>
-    
-</tr> 
+
+</tr>

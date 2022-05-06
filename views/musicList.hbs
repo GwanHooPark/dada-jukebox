@@ -1,16 +1,20 @@
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, minimal-ui">
-   <link rel="stylesheet" sype="text/css" href = "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
-   <link rel="stylesheet" sype="text/css" href = "/assets/css/dada-audio.css">
-   <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
-   <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, target-densitydpi=medium-dpi, minimal-ui">
+    <link rel="stylesheet" sype="text/css" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" sype="text/css" href="/assets/css/dada-audio.css">
+    <link rel="stylesheet" sype="text/css" href="/assets/css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
     <script src="https://unpkg.com/flowbite@1.4.4/dist/flowbite.js"></script>
-   <script src="/assets/js/dada-audio.js"></script>
-   <script>
-        $(document).ready(function(){
+    <script src="/assets/js/dada-audio.js"></script>
+    <script>
+        $(document).ready(function () {
             console.log("Read");
             // create an array of objects with the id, trigger element (eg. button), and the content element
             const tabElements = [
@@ -28,7 +32,7 @@
                     id: 'movie',
                     triggerEl: document.querySelector('#movieTab'),
                     targetEl: document.querySelector('#movie')
-                }                
+                }
             ];
 
             // options with default values
@@ -45,57 +49,74 @@
         });
     </script>
 </head>
-<body>
+
+<body class="bg-amber-50">
     <div class="container mx-auto px-4">
+        <div data-v-ee13c5e0="" class="header relative flex items-center pt-5"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACrUlEQVRoge2Zz0sUYRyHn3d2I5WMoiDINTNj66Ai2T+geBNEPBhG/sB0JKOWLlHWYU9B/0DQsVsdQjxkdAj/iA6aQqIGUVbSKRx3308HW1lrRlvbdR2Y57DM7Pf9vvt5lnnnBwMRERER5cSUO4AvD97XIDMGugpUgBnjUfKV39D4PkfbmYm5NnDGkbpBednsE6DOr6X8Anfnqjnk9CHdBJpBPoPMmaD28gncn01iYsOAi3R8r9Psr0BaDpmFdqQUohP032twfwQmPpwCbwhv/gYBx/JeKa3AvdlWHMeFjX4wlaX4ieILpBcr8Lxe4A7QUvT5/6B4Ag8XGrAaxfNGgBNFm3cX/k8gtygtLtb2ALHixPp39iaQXjyGtz6IN58C6osbqTAKE8gtSm/9GpiqEmUqiN0Fbi0c5mi2C2tcDB2bXx6cW6hggbtzp4k7t8FeR+bkAcq8jWCBuJkBJfcxy06sBBWc4B69K0WSPbCClVvuEBERB5XAk+Olt2svJXqQ0O+HJOW2Bdr88N3X74bN2vb+rTHk1f6aT2irn49Y6y4N1r72yxl4FjLQWOi/USISMuZpUDFQwGYzbaDHwNeSxCqM2qDCrtfX89M6fCT+vQs5rrAdZTiEkMTyQMI3a0E3CE1vVlsd67iCa0JVoRPI0TK5dsxW2kFlbUqY+tAJbJGW03T5W7vAFepBxMIlkEfj9OcGZcyoYETafKQMlUCOszOLFZU/qnox5o5ES+gE8rk4udoK1pXoBypDJ5CjcerzqY2sGZLsDURd6AS2SMtJNn1pl1VK0IlkwiWQx7nnq0knlhmWxUUcD51AjgtTq9WZnxt9wtxEag6dQD4NLz612azGkboF8TyBpeWBxFm/ngMlkCPxbKUmFo+Nga5gTQxsaqk/4fuKKSIiIqK8/AJ7WVh8sCL86QAAAABJRU5ErkJggg==">
+            <div class="logo">Dada <span>JukeBox</span></div>
+        </div>
         <div class="mb-4 border-b border-gray-200">
-            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab"
+                data-tabs-toggle="#myTabContent" role="tablist">
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 rounded-t-lg border-b-2" id="morningJungTab" data-tabs-target="#morningJung" type="button" role="tab" aria-controls="morningJung" aria-selected="false">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2" id="morningJungTab"
+                        data-tabs-target="#morningJung" type="button" role="tab" aria-controls="morningJung"
+                        aria-selected="false">
                         정지영입니다.
                     </button>
                 </li>
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="baeCamTab" data-tabs-target="#baeCam" type="button" role="tab" aria-controls="baeCam" aria-selected="false">
+                    <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        id="baeCamTab" data-tabs-target="#baeCam" type="button" role="tab" aria-controls="baeCam"
+                        aria-selected="false">
                         배철수음악캠프
                     </button>
                 </li>
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="movieTab" data-tabs-target="#movie" type="button" role="tab" aria-controls="movie" aria-selected="false">
+                    <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        id="movieTab" data-tabs-target="#movie" type="button" role="tab" aria-controls="movie"
+                        aria-selected="false">
                         영화 음악
                     </button>
-                </li>        
+                </li>
             </ul>
         </div>
         <div id="myTabContent">
-            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="morningJung" role="tabpanel">
+            <div class="hidden p-4 bg-gray-100 rounded-lg dark:bg-gray-800" id="morningJung" role="tabpanel">
                 <table class='mx-auto max-w-4xl w-full rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <tbody class="divide-y divide-gray-200">
                         {{#each jungList}}
-                            {{> list }}          
-                        {{/each}}                
+                        {{> list }}
+                        {{/each}}
                     </tbody>
                 </table>
-                
+
             </div>
-            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="baeCam" role="tabpanel" >
-                <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
+            <div class="hidden p-4 bg-gray-100 rounded-lg dark:bg-gray-800" id="baeCam" role="tabpanel">
+                <table
+                    class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <tbody class="divide-y divide-gray-200">
-                         {{#each baeList}}  
-                            {{> list }}          
-                         {{/each}}           
+                        {{#each baeList}}
+                        {{> list }}
+                        {{/each}}
                     </tbody>
                 </table>
             </div>
-            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="movie" role="tabpanel">
-                <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
+            <div class="hidden p-4 bg-gray-100 rounded-lg dark:bg-gray-800" id="movie" role="tabpanel">
+                <table
+                    class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <tbody class="divide-y divide-gray-200">
-                         {{#each movieList}}  
-                            {{> list }}          
-                         {{/each}}           
+                        {{#each movieList}}
+                        {{> list }}
+                        {{/each}}
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </div>
-    </div>    
+    </div>
 </body>
+
 </html>

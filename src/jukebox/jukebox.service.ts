@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { MusicInfo, MBCInfo } from '@/interface/interfaces';
+import { ConfigService } from '@nestjs/config';
 import { MorningJung, BaeCam, Movie } from '@/enum/enums';
 import { BroadcastService } from '@/broadcast/broadcast.service';
 import axios from 'axios';
@@ -12,7 +13,8 @@ export class JukeboxService {
     private readonly logger = new Logger(JukeboxService.name);
 
     constructor(
-        private readonly broadcastService: BroadcastService
+        private readonly broadcastService: BroadcastService,
+        private readonly configService: ConfigService
     ) { }
 
     initMusicInfo(options?: Partial<MusicInfo>): MusicInfo {
@@ -41,7 +43,7 @@ export class JukeboxService {
                 artist: $(el).find('p.singer').text()
             })
         });
-        
+
         return musicInfos;
     }
 
@@ -69,7 +71,7 @@ export class JukeboxService {
                 tempMusicInfo = this.initMusicInfo();
             }
         });
-        
+
         return musicInfos;
     }
 
@@ -108,22 +110,28 @@ export class JukeboxService {
     broadCastMorningJung(): void {
         this.logger.log('broadCast MorningJung....');
         this.getMBCData(MorningJung).then(result => {
-            this.broadcastService.telegramSendMessage(result, '오늘 아침 정지영입니다');
+            this.broadcastService.telegramSendMusicMessage(result, '오늘 아침 정지영입니다');
         });
     }
 
     broadCastBaeCam(): void {
         this.logger.log('broadCast BaeCam.....');
         this.getMBCData(BaeCam).then(result => {
-            this.broadcastService.telegramSendMessage(result, '배철수의 음악캠프');
+            this.broadcastService.telegramSendMusicMessage(result, '배철수의 음악캠프');
         });
     }
 
     broadCastMovie(): void {
         this.logger.log('broadCast Movie....');
         this.getMBCMovieData(Movie).then(result => {
-            this.broadcastService.telegramSendMessage(result, 'FM영화음악 김세윤입니다');
+            this.broadcastService.telegramSendMusicMessage(result, 'FM영화음악 김세윤입니다');
         });
+    }
+
+    broadCastWebUrl(): void {
+        this.logger.log('broadCast WebUrl....');
+        const url: string = this.configService.get<string>('JUKEBOX_WEB');
+        this.broadcastService.telegramSendMessage(url, '홈페이지');
     }
 
     broadCastSticker(): void {
