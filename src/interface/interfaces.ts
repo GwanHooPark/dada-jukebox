@@ -11,6 +11,7 @@ interface MBCInfo {
 }
 
 interface MusicList {
+    movieTitle?: string,
     albumThumbnailUrl?: string,
     title?: string,
     artist?: string,

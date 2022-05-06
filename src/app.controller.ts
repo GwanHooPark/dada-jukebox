@@ -2,6 +2,7 @@ import { Controller, Get, Render, Logger, Param, Query } from '@nestjs/common';
 import { MusicList } from './interface/interfaces';
 import { JukeboxService } from './jukebox/jukebox.service';
 import { SpotifyService } from './spotify/spotify.service';
+import { MorningJung, BaeCam, Movie } from '@/enum/enums';
 
 @Controller()
 export class AppController {
@@ -14,19 +15,19 @@ export class AppController {
   ) { }
 
   @Get()
-  @Render('index')
+  @Render('musicList')
   async root() {
-    const list: Array<MusicList> = await this.spotifyService.getMusicList();
-    console.log(list)
-    return { message: '123 ', musicList: list }
+    const jungList: Array<MusicList> = await this.spotifyService.getMusicList(MorningJung);
+    const baeList: Array<MusicList> = await this.spotifyService.getMusicList(BaeCam);
+    const movieList: Array<MusicList> = await this.spotifyService.getMovieMusicList(Movie);
+    return { jungList: jungList, baeList: baeList, movieList: movieList };
   }
 
-   @Get('/musiclist')
-  @Render('musicList')
+   @Get('/admin7979')
+  @Render('index')
   async musicList() {
-    const list: Array<MusicList> = await this.spotifyService.getMusicList();
-    console.log(list)
-    return { message: '123 ', musicList: list }
+   
+    return { message: '123' };
   }
 
   @Get('/api/broadcast/:type')

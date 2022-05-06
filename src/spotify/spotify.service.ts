@@ -2,7 +2,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { SpotifyAuth } from "./spotify.auth";
 import { JukeboxService } from "@/jukebox/jukebox.service";
 import { MusicInfo, MBCInfo, MusicList } from '@/interface/interfaces';
-import { MorningJung, BaeCam, Movie } from '@/enum/enums';
+
 
 var SpotifyWebApi = require('spotify-web-api-node');
 
@@ -27,8 +27,17 @@ export class SpotifyService {
         });
     }
 
-    async getMusicList(): Promise<Array<MusicList>> {
-        const data: Array<MusicInfo> = await this.jukeboxService.getMBCData(MorningJung)
+    //Todo: getBBCData getMovieMusicList 를 리팩토링 해야함. factory pattern
+    async getMusicList(type: MBCInfo): Promise<Array<MusicList>> {
+        const data: Array<MusicInfo> = await this.jukeboxService.getMBCData(type)
+
+        return await Promise.all(
+            data.map(info => { return this.searchSpotify(info) })
+        );
+    }
+
+    async getMovieMusicList(type: MBCInfo): Promise<Array<MusicList>> {
+        const data: Array<MusicInfo> = await this.jukeboxService.getMBCMovieData(type)
 
         return await Promise.all(
             data.map(info => { return this.searchSpotify(info) })
@@ -51,10 +60,12 @@ export class SpotifyService {
                         const result = data.body.tracks.items[0] ? data.body.tracks.items[0] : null;
                         let list: MusicList = {
                             albumThumbnailUrl: result ? result.album.images[2].url : '',
+                            movieTitle: musicInfo.movieTitle,
                             title: result ? result.name : musicInfo.title,
                             artist: result ? result.artists[0].name : musicInfo.artist,
                             previewUrl: result ? result.preview_url : ''
                         }
+                        
                         resolve(list);
                     }, function (err) {
                         reject(err);

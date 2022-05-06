@@ -41,6 +41,7 @@ export class JukeboxService {
                 artist: $(el).find('p.singer').text()
             })
         });
+        
         return musicInfos;
     }
 
@@ -68,7 +69,7 @@ export class JukeboxService {
                 tempMusicInfo = this.initMusicInfo();
             }
         });
-
+        
         return musicInfos;
     }
 
