@@ -5,17 +5,21 @@
                 {{#if albumThumbnailUrl}}
                 <img class='w-10 h-10 object-cover rounded-md' alt='album image' src='{{albumThumbnailUrl}}' />
                 {{else}}
-                <img class='w-10 h-10 object-cover rounded-md' alt='album image' src='/assets/image/record.png' />
+                <img class='w-10 h-10 object-cover rounded-md record' alt='album image'
+                    src='/assets/image/record.png' />
                 {{/if}}
             </div>
             <div class="">
-                <p class=""> {{#if movieTitle}}[{{movieTitle}}]{{/if}} {{title}} </p>
-                <p class="text-gray-500 text-sm font-semibold tracking-wide"> {{artist}} </p>
+                {{#if movieTitle}}<p>[{{movieTitle}}]</p>{{/if}}
+                <p class="title"> {{title}} </p>
+                <img style="display:inline-block" class="w-4 cursor-pointer copyBtn" src="/assets/image/copy_icon.png"
+                    data-clipboard-text="{{title}}" />
+                <p class="artist text-gray-500 text-sm font-semibold tracking-wide"> {{artist}} </p>
             </div>
         </div>
         {{#if previewUrl}}
         <div class="dada-audio">
-            <img class="spotify-logo w-9" src='/assets/image/spotify_icon.png' />
+            <img class="spotify-logo w-8" src='/assets/image/spotify_icon.png' />
             <audio src="{{previewUrl}}" preload="metadata" loop></audio>
             <button class="play-icon"></button>
             <span class="time current-time">0:00</span>

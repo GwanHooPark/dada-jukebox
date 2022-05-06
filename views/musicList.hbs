@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
     <script src="https://unpkg.com/flowbite@1.4.4/dist/flowbite.js"></script>
     <script src="/assets/js/dada-audio.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+    {{!--
+    <link href="https://unpkg.com/@primer/css@^19.0.0/dist/primer.css" rel="stylesheet" /> --}}
     <script>
         $(document).ready(function () {
             console.log("Read");
@@ -46,13 +49,20 @@
             };
             const tabs = new Tabs(tabElements, options);
             $(".dada-audio").dadaAudio();
+            $(".tooltipped-s").on('click', function () {
+                $(this).addClass('tooltipped');
+                setTimeout(() => {
+                    $(this).removeClass('tooltipped');
+                }, 2000)
+            });
+            new ClipboardJS('.copyBtn');
         });
     </script>
 </head>
 
 <body class="bg-amber-50">
     <div class="container mx-auto px-4">
-        <div data-v-ee13c5e0="" class="header relative flex items-center pt-5"><img
+        <div data-v-ee13c5e0="" class="jukebox-header relative flex items-center pt-5"><img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACrUlEQVRoge2Zz0sUYRyHn3d2I5WMoiDINTNj66Ai2T+geBNEPBhG/sB0JKOWLlHWYU9B/0DQsVsdQjxkdAj/iA6aQqIGUVbSKRx3308HW1lrRlvbdR2Y57DM7Pf9vvt5lnnnBwMRERER5cSUO4AvD97XIDMGugpUgBnjUfKV39D4PkfbmYm5NnDGkbpBednsE6DOr6X8Anfnqjnk9CHdBJpBPoPMmaD28gncn01iYsOAi3R8r9Psr0BaDpmFdqQUohP032twfwQmPpwCbwhv/gYBx/JeKa3AvdlWHMeFjX4wlaX4ieILpBcr8Lxe4A7QUvT5/6B4Ag8XGrAaxfNGgBNFm3cX/k8gtygtLtb2ALHixPp39iaQXjyGtz6IN58C6osbqTAKE8gtSm/9GpiqEmUqiN0Fbi0c5mi2C2tcDB2bXx6cW6hggbtzp4k7t8FeR+bkAcq8jWCBuJkBJfcxy06sBBWc4B69K0WSPbCClVvuEBERB5XAk+Olt2svJXqQ0O+HJOW2Bdr88N3X74bN2vb+rTHk1f6aT2irn49Y6y4N1r72yxl4FjLQWOi/USISMuZpUDFQwGYzbaDHwNeSxCqM2qDCrtfX89M6fCT+vQs5rrAdZTiEkMTyQMI3a0E3CE1vVlsd67iCa0JVoRPI0TK5dsxW2kFlbUqY+tAJbJGW03T5W7vAFepBxMIlkEfj9OcGZcyoYETafKQMlUCOszOLFZU/qnox5o5ES+gE8rk4udoK1pXoBypDJ5CjcerzqY2sGZLsDURd6AS2SMtJNn1pl1VK0IlkwiWQx7nnq0knlhmWxUUcD51AjgtTq9WZnxt9wtxEag6dQD4NLz612azGkboF8TyBpeWBxFm/ngMlkCPxbKUmFo+Nga5gTQxsaqk/4fuKKSIiIqK8/AJ7WVh8sCL86QAAAABJRU5ErkJggg==">
             <div class="logo">Dada <span>JukeBox</span></div>
         </div>
@@ -60,7 +70,7 @@
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab"
                 data-tabs-toggle="#myTabContent" role="tablist">
                 <li class="mr-2" role="presentation">
-                    <button class="inline-block p-4 rounded-t-lg border-b-2" id="morningJungTab"
+                    <button class="inline-block p-3 rounded-t-lg border-b-2" id="morningJungTab"
                         data-tabs-target="#morningJung" type="button" role="tab" aria-controls="morningJung"
                         aria-selected="false">
                         정지영입니다.
@@ -68,7 +78,7 @@
                 </li>
                 <li class="mr-2" role="presentation">
                     <button
-                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        class="inline-block p-3 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                         id="baeCamTab" data-tabs-target="#baeCam" type="button" role="tab" aria-controls="baeCam"
                         aria-selected="false">
                         배철수음악캠프
@@ -76,7 +86,7 @@
                 </li>
                 <li class="mr-2" role="presentation">
                     <button
-                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        class="inline-block p-3 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                         id="movieTab" data-tabs-target="#movie" type="button" role="tab" aria-controls="movie"
                         aria-selected="false">
                         영화 음악
@@ -84,7 +94,7 @@
                 </li>
             </ul>
         </div>
-        <div id="myTabContent">
+        <div id="myTabContent" class="mb-4">
             <div class="hidden p-4 bg-gray-100 rounded-lg dark:bg-gray-800" id="morningJung" role="tabpanel">
                 <table class='mx-auto max-w-4xl w-full rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <tbody class="divide-y divide-gray-200">
