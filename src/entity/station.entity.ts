@@ -8,7 +8,7 @@ import {
   Unique,
   OneToMany 
 } from 'typeorm';
-import { Musics } from '@/entity/musics.entity';
+import { Song } from '@/entity/song.entity';
 
 @Entity({ name: 'station' })
 @Unique(['id'])
@@ -40,6 +40,6 @@ export class Station extends BaseEntity {
   @UpdateDateColumn({ name: 'update_at', comment: '수정일' })
   updatedAt: Date;
 
-  @OneToMany(type => Musics, music => music.station)
-  music: Musics[];
+  @OneToMany(() => Song, song => song.station)
+  songs: Song[];
 }
