@@ -6,7 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,  
   Unique,
-  ManyToOne
+  ManyToOne,
+  JoinColumn
 } from 'typeorm';
 import { Station } from '@/entity/station.entity';
 
@@ -38,5 +39,6 @@ export class Song extends BaseEntity {
   updatedAt: Date;
 
   @ManyToOne(() => Station, station => station.songs)
+  @JoinColumn({ name: "station_id" })
   station: Station;
 }
