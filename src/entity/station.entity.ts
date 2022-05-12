@@ -16,23 +16,23 @@ export class Station extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 50, comment: '채널' })
+  @Column({ length: 50, comment: '채널' })
   channel: string;
 
-  @Column({ type: 'varchar', length: 255, comment: '방송명' })
+  @Column({ name: 'broadcast_name', length: 255, comment: '방송명' })
   braoadcastName: string;
 
-  @Column({ type: 'varchar', length: 255, comment: '홈페이지url' })
+  @Column({ name: 'home_url', length: 255, comment: '홈페이지url' })
   homeUrl: string;
 
-  @Column({ type: 'varchar', length: 255, comment: '매일게시판url' })
+  @Column({ name: 'daily_list', length: 255, comment: '매일게시판url' })
   dailyList: string;
 
-  @Column({ type: 'varchar', length: 255, comment: '셀렉터' })
+  @Column({ name: 'list_selector', length: 255, comment: '셀렉터' })
   listSelector: string;
 
-  @Column({ type: 'boolean', comment: 'message 송신 여부' })
-  isBroadCast: string;
+  @Column({ name: 'is_broadcast', comment: 'message 송신 여부' })
+  isBroadCast: boolean;
 
   @CreateDateColumn({ name: 'create_at', comment: '생성일' })
   createdAt: Date;

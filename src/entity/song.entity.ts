@@ -19,13 +19,13 @@ export class Song extends BaseEntity {
   @Column({ name: 'broadcast_date', comment: '날짜' })
   broadcastDate: Date;
 
-  @Column({ type: 'varchar', length: 255, comment: '앨범썸네일' })
+  @Column({ length: 255, comment: '앨범썸네일' })
   thumbnail: string;
 
-  @Column({ type: 'varchar', length: 255, comment: '가수' })
+  @Column({ length: 255, comment: '가수' })
   artist: string;
 
-  @Column({ type: 'varchar', length: 255, comment: '제목' })
+  @Column({ length: 255, comment: '제목' })
   title: string;
 
   @Column({ name: 'movie_title', length: 255, comment: '영화제목' })
