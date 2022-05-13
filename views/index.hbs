@@ -28,6 +28,17 @@
                     console.log('Fetch Error', err);
                 });
         }
+        function dbSearch() {
+            const channel = document.getElementById('channel').value;
+            fetch(`/api/dbSearch?channel=${channel}`)
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    // error 처리
+                    console.log('Fetch Error', err);
+                });
+        }
     </script>
 </head>
 
@@ -40,7 +51,9 @@
     <button type="button" onclick="broadCast('sticker')">random sticker</button><br />
     keyword : <input type="text" name="keyword" id="keyword" /><br />
     artist : <input type="text" name="artist" id="artist" /><br />
+    channel : <input type="text" name="channel" id="channel" /><br />
     <input type="button" onclick="search()" value="검색" />
+    <input type="button" onclick="dbSearch()" value="DB테스트" />
 
     <ul>
         {{#each musicList}}

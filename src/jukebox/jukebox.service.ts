@@ -3,8 +3,11 @@ import { MusicInfo, MBCInfo } from '@/interface/interfaces';
 import { ConfigService } from '@nestjs/config';
 import { MorningJung, BaeCam, Movie } from '@/enum/enums';
 import { BroadcastService } from '@/broadcast/broadcast.service';
+import { StationRepository } from '@/station/station.repository';
 import axios from 'axios';
 import cheerio, { load } from 'cheerio';
+import { StationDto } from '@/station/station.dto';
+import { Station } from '@/station/station.entity';
 type CheerioRoot = ReturnType<typeof load>;
 
 @Injectable()
@@ -14,7 +17,8 @@ export class JukeboxService {
 
     constructor(
         private readonly broadcastService: BroadcastService,
-        private readonly configService: ConfigService
+        private readonly configService: ConfigService,
+        private readonly stationRepository: StationRepository,
     ) { }
 
     initMusicInfo(options?: Partial<MusicInfo>): MusicInfo {
@@ -154,5 +158,11 @@ export class JukeboxService {
         ];
         const randomNum: number = Math.floor(Math.random() * stickerArray.length);
         this.broadcastService.telegramSendSticker(stickerArray[randomNum]);
+    }
+
+    async dBsearch(channel: string) : Promise<StationDto> {
+        const t:Station = await this.stationRepository.findChannel(channel);
+        console.log(t)
+        return StationDto.toStationDto(t)
     }
 }

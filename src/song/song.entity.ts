@@ -9,7 +9,7 @@ import {
   ManyToOne,
   JoinColumn
 } from 'typeorm';
-import { Station } from '@/entity/station.entity';
+import { Station } from '@/station/station.entity';
 
 @Entity({ name: 'song' })
 @Unique(['id'])

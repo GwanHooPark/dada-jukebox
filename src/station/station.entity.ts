@@ -6,9 +6,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,  
   Unique,
-  OneToMany 
+  OneToMany
 } from 'typeorm';
-import { Song } from '@/entity/song.entity';
+import { Song } from '@/song/song.entity';
 
 @Entity({ name: 'station' })
 @Unique(['id'])
@@ -42,4 +42,23 @@ export class Station extends BaseEntity {
 
   @OneToMany(() => Song, song => song.station)
   songs: Song[];
+
+  static from(
+    channel: string,
+    braoadcastName: string,
+    homeUrl: string,
+    dailyList: string,
+    listSelector: string,
+    isBroadCast: boolean
+  ): Station {
+    const station:Station = new Station();
+    station.channel = channel;
+    station.braoadcastName =braoadcastName;
+    station.homeUrl = homeUrl;
+    station.dailyList = dailyList;
+    station.listSelector = listSelector;
+    station.isBroadCast = isBroadCast;
+    return station;
+  }
+    
 }

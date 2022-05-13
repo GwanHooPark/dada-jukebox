@@ -28,9 +28,9 @@ import * as Joi from 'joi';
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
         url : config.get('DATABASE_URL'),
-        ssl: {
-          rejectUnauthorized: false,
-        },
+        // ssl: {
+        //   rejectUnauthorized: false,
+        // },
         entities: ['dist/**/*.entity{.ts,.js}'],
         synchronize: true, // This for development
         autoLoadEntities: true,              

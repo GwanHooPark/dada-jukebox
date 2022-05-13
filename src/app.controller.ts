@@ -3,6 +3,7 @@ import { MusicList } from './interface/interfaces';
 import { JukeboxService } from './jukebox/jukebox.service';
 import { SpotifyService } from './spotify/spotify.service';
 import { MorningJung, BaeCam, Movie } from '@/enum/enums';
+import { StationDto } from './station/station.dto';
 
 @Controller()
 export class AppController {
@@ -57,5 +58,10 @@ export class AppController {
   search(@Query('keyword') keyword: string, @Query('artist') artist: string): void {
     this.spotifyService.search(keyword, artist);
     this.logger.log(`search keyword ${keyword}`);
+  }
+
+  @Get('/api/dbSearch')
+  dbSearch(@Query('channel') channel: string): Promise<StationDto> {
+    return this.jukeboxService.dBsearch(channel);    
   }
 }
