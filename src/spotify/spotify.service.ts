@@ -28,17 +28,15 @@ export class SpotifyService {
     }
 
     //Todo: getBBCData getMovieMusicList 를 리팩토링 해야함. factory pattern
-    async getMusicList(type: MBCInfo): Promise<Array<MusicList>> {
-        const data: Array<MusicInfo> = await this.jukeboxService.getMBCData(type)
-
+    async getMusicList(channel: string): Promise<Array<MusicList>> {
+        const data: Array<MusicInfo> = await this.jukeboxService.getMBCData(channel)
         return await Promise.all(
             data.map(info => { return this.searchSpotify(info) })
         );
     }
 
-    async getMovieMusicList(type: MBCInfo): Promise<Array<MusicList>> {
-        const data: Array<MusicInfo> = await this.jukeboxService.getMBCMovieData(type)
-
+    async getMovieMusicList(channel: string): Promise<Array<MusicList>> {
+        const data: Array<MusicInfo> = await this.jukeboxService.getMBCMovieData(channel)
         return await Promise.all(
             data.map(info => { return this.searchSpotify(info) })
         );
@@ -65,7 +63,7 @@ export class SpotifyService {
                             artist: result ? result.artists[0].name : musicInfo.artist,
                             previewUrl: result ? result.preview_url : ''
                         }
-                        
+
                         resolve(list);
                     }, function (err) {
                         reject(err);

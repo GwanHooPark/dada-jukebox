@@ -33,11 +33,19 @@ export class JukeboxService {
         }
     }
 
-    async getMBCData(info: MBCInfo): Promise<Array<MusicInfo>> {
 
-        const todayHtml: any = await this.getBorardSelectHtml(info);
+    async getStation(channel: string): Promise<StationDto> {
+        const t: Station = await this.stationRepository.findChannel(channel);
+        return StationDto.toStationDto(t)
+    }
+
+    async getMBCData(channel: string): Promise<Array<MusicInfo>> {
+
+        const stationInfo: StationDto = await this.getStation(channel);
+        console.log(stationInfo);
+        const todayHtml: any = await this.getBorardSelectHtml(stationInfo);
         const $: CheerioRoot = cheerio.load(todayHtml.data);
-        const list: any = $(info.ListSelector);
+        const list: any = $(stationInfo.listSelector);
 
         let musicInfos: Array<MusicInfo> = [];
         list.each((idx: number, el: any) => {
@@ -51,11 +59,13 @@ export class JukeboxService {
         return musicInfos;
     }
 
-    async getMBCMovieData(info: MBCInfo): Promise<Array<MusicInfo>> {
+    async getMBCMovieData(channel: string): Promise<Array<MusicInfo>> {
 
-        const todayHtml: any = await this.getBorardSelectHtml(info);
+        const stationInfo: StationDto = await this.getStation(channel);
+
+        const todayHtml: any = await this.getBorardSelectHtml(stationInfo);
         const $: CheerioRoot = cheerio.load(todayHtml.data);
-        const list: any = $(info.ListSelector);
+        const list: any = $(stationInfo.listSelector);
 
         let musicInfos: Array<MusicInfo> = [];
         let tempMusicTitle: string;
@@ -83,19 +93,20 @@ export class JukeboxService {
         return el.find('td.part').length > 0;
     }
 
-    async getBorardSelectHtml(info: MBCInfo): Promise<any> {
+    async getBorardSelectHtml(info: StationDto): Promise<any> {
         const todayLink: string = await this.getMBCTodayLink(info);
-        const todayHtml: string = await this.getHtml(`${info.HomeUrl}${todayLink}`);
+        console.log(`todayLink[${todayLink}]`)
+        const todayHtml: string = await this.getHtml(`${info.homeUrl}/${todayLink}`);
         return todayHtml;
     }
 
 
 
-    async getMBCTodayLink(info: MBCInfo): Promise<string> {
+    async getMBCTodayLink(info: StationDto): Promise<string> {
         try {
-            let firstPageHtml: any = await this.getHtml(info.DailyList);
+            let firstPageHtml: any = await this.getHtml(info.dailyList);
             const $: CheerioRoot = cheerio.load(firstPageHtml.data);
-            const todayLink = $(info.ListSelector).first().find('a').attr('href');
+            const todayLink = $(info.listSelector).first().find('a').attr('href');
             return todayLink;
         } catch (err) {
             console.log(err);
@@ -113,21 +124,21 @@ export class JukeboxService {
 
     broadCastMorningJung(): void {
         this.logger.log('broadCast MorningJung....');
-        this.getMBCData(MorningJung).then(result => {
+        this.getMBCData('MorningJung').then(result => {
             this.broadcastService.telegramSendMusicMessage(result, '오늘 아침 정지영입니다');
         });
     }
 
     broadCastBaeCam(): void {
         this.logger.log('broadCast BaeCam.....');
-        this.getMBCData(BaeCam).then(result => {
+        this.getMBCData('BaeCam').then(result => {
             this.broadcastService.telegramSendMusicMessage(result, '배철수의 음악캠프');
         });
     }
 
     broadCastMovie(): void {
         this.logger.log('broadCast Movie....');
-        this.getMBCMovieData(Movie).then(result => {
+        this.getMBCMovieData('Movie').then(result => {
             this.broadcastService.telegramSendMusicMessage(result, 'FM영화음악 김세윤입니다');
         });
     }
@@ -160,9 +171,12 @@ export class JukeboxService {
         this.broadcastService.telegramSendSticker(stickerArray[randomNum]);
     }
 
-    async dBsearch(channel: string) : Promise<StationDto> {
-        const t:Station = await this.stationRepository.findChannel(channel);
+    async dBsearch(channel: string): Promise<StationDto> {
+        const t: Station = await this.stationRepository.findChannel(channel);
         console.log(t)
+        const test: StationDto = StationDto.toStationDto(t);
+        console.log(test.channel);
         return StationDto.toStationDto(t)
     }
+
 }

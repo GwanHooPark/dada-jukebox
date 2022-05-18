@@ -18,9 +18,9 @@ export class AppController {
   @Get()
   @Render('musicList')
   async root() {
-    const jungList: Array<MusicList> = await this.spotifyService.getMusicList(MorningJung);
-    const baeList: Array<MusicList> = await this.spotifyService.getMusicList(BaeCam);
-    const movieList: Array<MusicList> = await this.spotifyService.getMovieMusicList(Movie);
+    const jungList: Array<MusicList> = await this.spotifyService.getMusicList('MorningJung');
+    const baeList: Array<MusicList> = await this.spotifyService.getMusicList('BaeCam');
+    const movieList: Array<MusicList> = await this.spotifyService.getMovieMusicList('Movie');
     return { jungList: jungList, baeList: baeList, movieList: movieList };
   }
 
@@ -62,6 +62,6 @@ export class AppController {
 
   @Get('/api/dbSearch')
   dbSearch(@Query('channel') channel: string): Promise<StationDto> {
-    return this.jukeboxService.dBsearch(channel);    
+    return this.jukeboxService.dBsearch(channel);
   }
 }

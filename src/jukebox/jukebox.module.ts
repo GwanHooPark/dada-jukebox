@@ -5,7 +5,7 @@ import { BroadcastModule } from '@/broadcast/broadcast.module';
 import { StationRepository } from '@/station/station.repository';
 
 @Module({
-  imports: [BroadcastModule,TypeOrmModule.forFeature([StationRepository])],
+  imports: [BroadcastModule, TypeOrmModule.forFeature([StationRepository])],
   controllers: [],
   providers: [JukeboxService],
   exports: [JukeboxService]

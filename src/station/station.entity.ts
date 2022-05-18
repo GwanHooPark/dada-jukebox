@@ -4,7 +4,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn,  
+  UpdateDateColumn,
   Unique,
   OneToMany
 } from 'typeorm';
@@ -51,14 +51,14 @@ export class Station extends BaseEntity {
     listSelector: string,
     isBroadCast: boolean
   ): Station {
-    const station:Station = new Station();
+    const station: Station = new Station();
     station.channel = channel;
-    station.braoadcastName =braoadcastName;
+    station.braoadcastName = braoadcastName;
     station.homeUrl = homeUrl;
     station.dailyList = dailyList;
     station.listSelector = listSelector;
     station.isBroadCast = isBroadCast;
     return station;
   }
-    
+
 }
