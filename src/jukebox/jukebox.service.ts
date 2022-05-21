@@ -125,6 +125,7 @@ export class JukeboxService {
     broadCastMorningJung(): void {
         this.logger.log('broadCast MorningJung....');
         this.getMBCData('MorningJung').then(result => {
+            console.log(result);
             this.broadcastService.telegramSendMusicMessage(result, '오늘 아침 정지영입니다');
         });
     }
@@ -139,6 +140,7 @@ export class JukeboxService {
     broadCastMovie(): void {
         this.logger.log('broadCast Movie....');
         this.getMBCMovieData('Movie').then(result => {
+            console.log(result);
             this.broadcastService.telegramSendMusicMessage(result, 'FM영화음악 김세윤입니다');
         });
     }
